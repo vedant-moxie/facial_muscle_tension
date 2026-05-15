@@ -1,0 +1,38 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Node / Vite ---
+node_modules/
+dist/
+.vite/
+*.log
+
+# --- Editor / OS ---
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# --- App ---
+backend/.env
+frontend/.env
+backend/uploads/
+/tmp/effortlessness_uploads/
+*.mp4
+*.mov
+*.webm
+*.mkv
+*.m4v
+*.avi
+
+# --- Model caches (py-feat / torch) live under ~/.cache, but stray dirs sometimes get copied here ---
+feat_data/
+torch_hub/

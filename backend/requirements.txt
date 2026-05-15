@@ -1,0 +1,36 @@
+# Pinned to a known-good combo for Python 3.11 on macOS arm64.
+# The pins matter — without them pip's resolver backtracks through pandas 3.x
+# / numpy 2.x / numexpr sdist-only versions and the install fails.
+
+# --- Web framework ---
+fastapi>=0.110,<0.120
+uvicorn[standard]>=0.27,<0.40
+python-multipart>=0.0.9
+aiofiles>=23.2
+python-dotenv>=1.0
+
+# --- Facial Action Coding ---
+py-feat==0.6.2              # py-feat: FACS AU detector
+mediapipe>=0.10.9,<0.10.15  # later mediapipe pulls protobuf 5 + jax — overkill
+
+# --- Video & numerics — the pins below are the load-bearing ones ---
+# numpy is pinned to exactly 1.23.5: it's the only version that satisfies the
+# joint constraints of py-feat→nltools (<1.24) and opencv (>=1.23.5).
+numpy==1.23.5
+pandas>=2.0,<2.2            # newer pandas needs numpy>=1.26
+scipy>=1.10,<1.12           # scipy ≥1.12 needs numpy ≥1.24
+numexpr==2.8.4              # only <2.8.5 version with arm64 wheel
+opencv-python-headless>=4.9,<4.11
+ffmpeg-python>=0.2.0
+# PyAV: preferred decode path for variable-frame-rate video (gives correct
+# per-frame timestamps via best_effort_timestamp). The extractor falls back
+# to OpenCV if PyAV isn't installed, so this remains technically optional.
+av>=11.0,<13.0
+
+# --- API models ---
+pydantic>=2.6,<3.0
+
+# --- Runtime ---
+torch>=2.1,<2.5             # newer torch pulls in massive deps; 2.4 is plenty
+Pillow>=10.0,<12.0
+tqdm>=4.66

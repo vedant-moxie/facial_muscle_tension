@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root { height: 100%; }
+
+body {
+  font-family: theme('fontFamily.sans');
+  background:
+    radial-gradient(1200px 600px at 0% -10%, rgba(167,139,250,0.10), transparent 60%),
+    radial-gradient(1000px 500px at 100% 0%, rgba(90,169,255,0.08), transparent 60%),
+    theme('colors.bg');
+  background-attachment: fixed;
+}
+
+::-webkit-scrollbar          { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb    { background: theme('colors.line'); border-radius: 6px; }
+::-webkit-scrollbar-track    { background: transparent; }
+
+.card {
+  @apply bg-panel border border-line rounded-2xl shadow-card;
+}
+
+.chip {
+  @apply inline-flex items-center gap-1.5 text-xs font-medium rounded-full px-2.5 py-1 border;
+}
