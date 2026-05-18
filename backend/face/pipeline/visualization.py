@@ -38,7 +38,7 @@ from typing import Any, Dict, List
 import numpy as np
 import pandas as pd
 
-from pipeline.face_tracker import VIZ_LANDMARK_GROUPS
+from face.pipeline.combined_tracker import VIZ_LANDMARK_GROUPS
 
 log = logging.getLogger(__name__)
 

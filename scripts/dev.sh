@@ -36,8 +36,11 @@ echo "→ Starting frontend (logs: $FRONT_LOG)"
 ( cd "$ROOT/frontend" && npm run dev ) >"$FRONT_LOG" 2>&1 &
 
 echo
-echo "Backend  → http://localhost:8000  (POST /api/analyse, GET /api/result/{id})"
-echo "Frontend → http://localhost:5173"
+echo "Backend  → http://localhost:8000"
+echo "    Face     POST /api/analyse           GET /api/result/{id}"
+echo "    Audio    POST /api/audio/analyse     GET /api/audio/result/{id}"
+echo "    Presence POST /api/presence/analyse  GET /api/presence/result/{id}"
+echo "Frontend → http://localhost:5173  (tabs: Face / Audio / Presence)"
 echo
 echo "Tail logs with:  tail -f $BACK_LOG  $FRONT_LOG"
 wait

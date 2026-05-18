@@ -1,0 +1,26 @@
+pose:
+  model: heavy                      # lite | full | heavy
+  min_pose_confidence: 0.5
+  min_visibility: 0.5
+  sample_fps: 12                    # frames sampled per second from source
+quality:
+  min_usable_frame_fraction: 0.60
+  max_camera_roll_deg: 15
+filters:
+  one_euro_min_cutoff: 1.0
+  one_euro_beta: 0.007
+metrics:
+  rolling_window_seconds: 5
+scoring:
+  model_path: data/models/scorer_v1.joblib
+  fallback_weights:
+    shoulder: 0.20
+    head: 0.20
+    arms: 0.30
+    fluidity: 0.30
+cache:
+  dir: data/cache
+  enabled: true
+runtime:
+  num_workers: 4
+  use_gpu: auto

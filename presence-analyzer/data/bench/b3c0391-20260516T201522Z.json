@@ -1,0 +1,38 @@
+[
+  {
+    "video": "synthetic_10s.mp4",
+    "duration_sec": 10.0,
+    "cold_sec": 1.6403275420016143,
+    "warm_sec": 0.012708583002677187,
+    "budget_sec": 12.0,
+    "ok": true,
+    "timings": {
+      "pose_extract": 1.6255220000020927,
+      "filter": 0.004648375004762784,
+      "quality": 0.0020636660046875477,
+      "metric_shoulder": 0.0007815419958205894,
+      "metric_head": 0.0009732920007081702,
+      "metric_arms": 0.001440834006643854,
+      "metric_fluidity": 0.0006148329994175583,
+      "score": 0.0001355840067844838
+    }
+  },
+  {
+    "video": "synthetic_60s.mp4",
+    "duration_sec": 60.0,
+    "cold_sec": 8.253038458002266,
+    "warm_sec": 0.030840041988994926,
+    "budget_sec": 12.0,
+    "ok": true,
+    "timings": {
+      "pose_extract": 8.221729583005072,
+      "filter": 0.01956145800068043,
+      "quality": 0.0033066249889088795,
+      "metric_shoulder": 0.0013523750094464049,
+      "metric_head": 0.0009349169995402917,
+      "metric_arms": 0.0017923330015037209,
+      "metric_fluidity": 0.0006139170000096783,
+      "score": 5.1417009672150016e-05
+    }
+  }
+]

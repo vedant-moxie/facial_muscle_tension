@@ -23,7 +23,7 @@ from typing import List, Optional
 import numpy as np
 import pandas as pd
 
-from pipeline.baseline import derive_blink_events_from_threshold
+from face.pipeline.baseline import derive_blink_events_from_threshold
 
 # Wider band: conversation = 17, reading = 6-10, screen = 8-10, monologue ≈ 12.
 GENUINE_BLINK_MIN = 8.0

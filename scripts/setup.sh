@@ -108,6 +108,33 @@ pip install --prefer-binary "numpy==1.23.5"
 pip install --prefer-binary -r backend/requirements.txt
 [ -f backend/.env ] || cp backend/.env.example backend/.env
 
+# ---------- presence-analyzer (separate venv via uv) ----------
+# The presence pipeline pins numpy==1.26.4 / mediapipe==0.10.18, which clash
+# with py-feat's numpy==1.23.5 in the backend venv. So it lives in its own
+# uv-managed venv at presence-analyzer/.venv and the backend shells out to it.
+PRESENCE_DIR="$ROOT/presence-analyzer"
+if [[ -d "$PRESENCE_DIR" ]]; then
+  UV_BIN="$(command -v uv || echo "$HOME/.local/bin/uv")"
+  if [[ ! -x "$UV_BIN" ]]; then
+    echo "→ uv not found — installing uv to ~/.local/bin"
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    UV_BIN="$HOME/.local/bin/uv"
+  fi
+  if [[ ! -x "$UV_BIN" ]]; then
+    echo "✗ uv install failed; presence-analyzer cannot be set up." >&2
+    echo "  Install manually: https://docs.astral.sh/uv/getting-started/installation/" >&2
+    exit 1
+  fi
+  if ! command -v ffmpeg >/dev/null 2>&1; then
+    echo "⚠ ffmpeg not on PATH — presence analyzer needs it for video standardization."
+    echo "  brew install ffmpeg  (or your distro equivalent)"
+  fi
+  echo "→ Syncing presence-analyzer deps (uv)"
+  ( cd "$PRESENCE_DIR" && "$UV_BIN" sync --extra dev )
+else
+  echo "⚠ presence-analyzer/ not found — skipping (face/audio tabs will work, presence tab won't)."
+fi
+
 # ---------- frontend ----------
 echo "→ Installing npm deps"
 ( cd frontend && npm install )
@@ -123,4 +150,7 @@ Activate the backend env:
 Then start both dev servers (or use scripts/dev.sh):
     cd backend  && uvicorn main:app --reload --port 8000
     cd frontend && npm run dev
+
+The Presence tab calls the presence-analyzer CLI in its own venv
+(presence-analyzer/.venv) via subprocess — no extra service to start.
 EOF

@@ -34,3 +34,38 @@ pydantic>=2.6,<3.0
 torch>=2.1,<2.5             # newer torch pulls in massive deps; 2.4 is plenty
 Pillow>=10.0,<12.0
 tqdm>=4.66
+
+# ============================================================================
+# Sonic Rebellion (audio pipeline) — sibling to the facial pipeline.
+#
+# librosa + soundfile are REQUIRED for the audio routes to work at all.
+# Everything below them is OPTIONAL — each module degrades to a librosa-
+# based "lite" path when its heavy ML dep is missing. Install whichever
+# you need; the pipeline will detect them automatically.
+# ============================================================================
+librosa>=0.10,<0.11
+soundfile>=0.12
+
+# --- Optional heavy ML deps (uncomment what you need) ---
+#
+# Instagram fetcher (profile URL / reel URLs modes):
+# instaloader>=4.10,<5.0
+#
+# Source separation (Spleeter — TensorFlow-based, ~1 GB model):
+# spleeter==2.3.2
+#
+# Speech transcription (Whisper tiny — 39 M params, ~75 MB):
+# openai-whisper>=20231117
+#
+# Pitch tracking (CREPE — better on compressed AAC than librosa.pyin):
+# crepe>=0.0.14
+# resampy>=0.4.2
+#
+# Audio-text embedding (CLAP — novelty search against trending pool):
+# msclap>=1.3.3
+# faiss-cpu>=1.7,<2.0
+# pyacoustid>=1.3      # chromaprint fingerprinting (also needs libchromaprint)
+#
+# Genre + beat (Essentia + madmom — ~500 MB of model weights):
+# essentia-tensorflow>=2.1b6
+# madmom>=0.16.1
